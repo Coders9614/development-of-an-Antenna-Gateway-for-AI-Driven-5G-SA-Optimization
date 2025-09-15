@@ -1,0 +1,23 @@
+* Interface with CU/DU via Protocol Stubs (eCPRI, F1, E2)
+
+import requests
+
+def send_to_cu_du(endpoint, payload):
+    try:
+        response = requests.post(endpoint, json=payload)
+        print(f"Sent to {endpoint} | Status: {response.status_code}")
+    except Exception as e:
+        print(f"Transmission error: {e}")
+
+# Example usage
+cu_endpoint = "http://cu-controller.local/api/ecpri"
+du_endpoint = "http://du-controller.local/api/f1"
+
+payload = {
+    'beam_id': 3,
+    'command': 'adjust_power',
+    'value': 75
+}
+
+send_to_cu_du(cu_endpoint, payload)
+send_to_cu_du(du_endpoint, payload)
