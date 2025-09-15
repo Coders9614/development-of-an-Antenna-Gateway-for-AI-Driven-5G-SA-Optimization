@@ -1,0 +1,22 @@
+* Energy-Aware Scheduling, Beamforming, Sleep Modes
+
+def energy_scheduler(rf_df, threshold=-95):
+    control_signals = []
+    for _, row in rf_df.iterrows():
+        if row['rsrp'] < threshold:
+            control_signals.append({
+                'beam_id': row['beam_id'],
+                'power_level': 50,
+                'sleep_mode': True
+            })
+        else:
+            control_signals.append({
+                'beam_id': row['beam_id'],
+                'power_level': 75,
+                'sleep_mode': False
+            })
+    return control_signals
+
+# Apply scheduler
+control_signals = energy_scheduler(rf_data)
+apply_rf_adjustments(control_signals)
