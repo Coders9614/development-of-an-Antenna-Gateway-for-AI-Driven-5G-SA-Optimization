@@ -1,0 +1,18 @@
+def apply_rf_adjustments(ai_decisions):
+    for decision in ai_decisions:
+        beam_id = decision['beam_id']
+        power_level = decision['power_level']
+        sleep_mode = decision.get('sleep_mode', False)
+
+        if sleep_mode:
+            print(f"Beam {beam_id}: Entering sleep mode.")
+        else:
+            print(f"Beam {beam_id}: Adjusting power to {power_level} dBm.")
+
+# Example AI decisions
+ai_decisions = [
+    {'beam_id': 3, 'power_level': 75},
+    {'beam_id': 5, 'power_level': 60, 'sleep_mode': True}
+]
+
+apply_rf_adjustments(ai_decisions)
