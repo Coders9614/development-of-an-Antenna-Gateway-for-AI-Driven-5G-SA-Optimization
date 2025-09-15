@@ -1,0 +1,16 @@
+import pandas as pd
+import numpy as np
+from datetime import datetime
+
+def collect_rf_telemetry(num_users=500):
+    telemetry = {
+        'timestamp': datetime.utcnow(),
+        'user_id': np.arange(num_users),
+        'rsrp': np.random.normal(-90, 5, num_users),       # dBm
+        'sinr': np.random.normal(20, 3, num_users),        # dB
+        'beam_id': np.random.randint(1, 8, num_users),     # sector ID
+        'user_density': np.random.uniform(0.1, 1.0, num_users)  # normalized
+    }
+    return pd.DataFrame(telemetry)
+
+rf_data = collect_rf_telemetry()
